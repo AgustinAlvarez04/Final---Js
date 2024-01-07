@@ -18,30 +18,17 @@ const inputNombre = document.getElementById("nombre")
 const inputPuntaje = document.getElementById("puntaje")
 const inputReseña = document.getElementById("reseña")
 const btnPublicar = document.getElementById("publicar")
+const btnLeer = document.getElementById("leer")
 
 const inputReserva = document.getElementById("reserva")
 const inputFecha = document.getElementById("fecha")
 const inputPersonas = document.getElementById("personas")
 const btnReservar = document.getElementById("reservar")
+const btnReservados = document.getElementById("reservados")
 
-
-let users = [
-    new Registros("User1", "admin1"),
-    new Registros("User2", "admin2"),
-    new Registros("User3", "admin3"),
-]
-
-let reservas = [
-    new Reservas("Agustin", "2023-01-14", 50),
-    new Reservas("Camila", "2023-01-14", 50),
-    new Reservas("Santiago", "2023-01-14", 50),
-]
-
-let valoraciones = [
-    new Valoraciones("Agustin", 10, "Muy buena comida"),
-    new Valoraciones("Camila", 5, "Llego la comida fria"),
-    new Valoraciones("Santiago", 3, "Platos sucios"),
-]
+let users = []
+let reservas = []
+let valoraciones = []
 
 btnRegistrar.onclick = (e) => {
     e.preventDefault()
@@ -56,11 +43,17 @@ btnRegistrar.onclick = (e) => {
             text: "Continua investigando",
             icon: "success",
         })
+    } else if (existente) {
+        Swal.fire({
+            title: "¡Algo salio mal!",
+            text: "Vuelve a intentarlo",
+            icon: "error",
+        })
     } else {
         Swal.fire({
-            title: "Usuario existente!",
-            text: "Vuelvelo a intentar",
-            icon: "error",
+            title: "Error en el formulario",
+            text: "Todos los campos son obligatorios",
+            icon: "warning",
         })
     }
 }
@@ -78,14 +71,35 @@ btnPublicar.onclick = (e) => {
             title: "¡Publicado!",
             icon: "success",
         })
-    } else {
+    } else if (repetido) {
         Swal.fire({
             title: "¡Algo salio mal!",
-            text: "Vuelvelo a intentar mas tarde",
+            text: "Vuelve a intentarlo",
             icon: "error",
+        })
+    } else {
+        Swal.fire({
+            title: "Error en el formulario",
+            text: "Todos los campos son obligatorios",
+            icon: "warning",
         })
     }
 }
+
+function verValoracion() {
+    let div = document.getElementById("div-valoraciones")
+    for (const valoracion of valoraciones) {
+        let contenedor = document.createElement("section")
+        contenedor.innerText = `Nombre: ${valoracion.nombre} Puntaje: ${valoracion.puntaje} Reseña: ${valoracion.reseña}`
+        div.appendChild(contenedor)
+    }
+}
+
+btnLeer.onclick = (e) => {
+    e.preventDefault()
+    verValoracion()
+}
+
 
 btnReservar.onclick = (e) => {
     e.preventDefault()
@@ -101,11 +115,31 @@ btnReservar.onclick = (e) => {
             title: "Reserva Realizada",
             icon: "success",
         })
-    } else {
+    } else if (ocupado) {
         Swal.fire({
             title: "¡Fecha ya Reservada!",
-            text: "Vuelvelo a intentar",
+            text: "Vuelve a intentarlo",
             icon: "error",
         })
+    } else {
+        Swal.fire({
+            title: "Error en el formulario",
+            text: "Todos los campos son obligatorios",
+            icon: "warning",
+        })
     }
+}
+
+function verReservas() {
+    let div = document.getElementById("div-reservas")
+    for (const reserva of reservas) {
+        let contenedor = document.createElement("section")
+        contenedor.innerText = `Nombre: ${reserva.nombre} Puntaje: ${reserva.fecha} Reseña: ${reserva.personas}`
+        div.appendChild(contenedor)
+    }
+}
+
+btnReservados.onclick = (e) => {
+    e.preventDefault()
+    verReservas()
 }
