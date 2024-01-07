@@ -45,7 +45,7 @@ btnRegistrar.onclick = (e) => {
         })
     } else if (existente) {
         Swal.fire({
-            title: "¡Algo salio mal!",
+            title: "¡Usuario existente!",
             text: "Vuelve a intentarlo",
             icon: "error",
         })
@@ -73,8 +73,8 @@ btnPublicar.onclick = (e) => {
         })
     } else if (repetido) {
         Swal.fire({
-            title: "¡Algo salio mal!",
-            text: "Vuelve a intentarlo",
+            title: "¡Ya subiste esta publicacion!",
+            text: "Vuelve a intentarlo con algo diferente.",
             icon: "error",
         })
     } else {
@@ -90,7 +90,7 @@ function verValoracion() {
     let div = document.getElementById("div-valoraciones")
     for (const valoracion of valoraciones) {
         let contenedor = document.createElement("section")
-        contenedor.innerText = `Nombre: ${valoracion.nombre} Puntaje: ${valoracion.puntaje} Reseña: ${valoracion.reseña}`
+        contenedor.innerText = `Nombre: ${valoracion.nombre} \n Puntaje: ${valoracion.puntaje} \nReseña: ${valoracion.reseña}`
         div.appendChild(contenedor)
     }
 }
