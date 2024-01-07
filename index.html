@@ -19,38 +19,36 @@
         <h2>Registrar Usuario</h2>
         <form class="col-lg-6 mx-auto row">
             <div class="form-group col-lg-9 container">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                <label for="usuario">Usuario</label>
+                <input type="text" class="form-control" id="usuario" placeholder="Usuario">
             </div>
             <div class="col-lg-9 container">
-                <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" id="apellido" placeholder="Apellido">
-            </div>
-            <div class="col-lg-9 container">
-                <label for="correo">Correo</label>
-                <input type="email" class="form-control" id="correo" placeholder="Correo">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control" id="contraseña" placeholder="Contraseña">
             </div>
             <div class="container mt-4">
                 <button type="submit" id="registrar" class="btn btn-primary">Registrar</button>
-                <button type="submit" id="logearse" class="btn btn-primary">Logearse</button>
             </div>
         </form>
     </section>
     <hr>
     <section id="valoraciones">
-        <h2>Valoraciones</h2>
+        <h2>Danos tu Opinion</h2>
         <form class="col-lg-6 mx-auto row">
             <div class="form-group col-lg-9 container">
                 <label for="nombre">Nombre</label>
                 <input type="text" class="form-control" id="nombre" placeholder="Nombre">
             </div>
             <div class="col-lg-9 container">
-                <label for="valoracion">Valoracion</label>
-                <input type="text" class="form-control" id="valoracion" placeholder="Valoracion">
+                <label for="puntaje">Puntaje</label>
+                <input type="number" class="form-control" id="puntaje" placeholder="Puntaje">
+            </div>
+            <div class="col-lg-9 container">
+                <label for="reseña">Reseña</label>
+                <input type="text" class="form-control" id="reseña" placeholder="Reseña">
             </div>
             <div class="container mt-4">
-                <button type="submit" id="agregar" class="btn btn-primary">Agregar</button>
-                <button type="submit" id="vaciar" class="btn btn-primary">Vaciar</button>
+                <button type="submit" id="publicar" class="btn btn-primary">Publicar</button>
             </div>
         </form>
     </section>
@@ -60,19 +58,18 @@
         <form class="col-lg-6 mx-auto row">
             <div class="form-group col-lg-9 container">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                <input type="text" class="form-control" id="reserva" placeholder="Nombre">
             </div>
             <div class="col-lg-9 container">
                 <label for="fecha">Fecha</label>
-                <input type="datetime" class="form-control" id="fecha" placeholder="Fecha">
+                <input type="date" class="form-control" id="fecha" placeholder="Fecha">
             </div>
             <div class="col-lg-9 container">
                 <label for="personas">Cantidad de Personas</label>
-                <input type="email" class="form-control" id="personas" placeholder="Cantidad de Personas">
+                <input type="number" class="form-control" id="personas" placeholder="Cantidad de Personas">
             </div>
             <div class="container mt-4">
-                <button type="submit" id="agregar" class="btn btn-primary">Agregar</button>
-                <button type="submit" id="vaciar" class="btn btn-primary">Vaciar</button>
+                <button type="submit" id="reservar" class="btn btn-primary">Reservar</button>
             </div>
         </form>
     </section>

@@ -1,5 +1,6 @@
 class Valoraciones{
-    constructor(nombre, valoracion){
+    constructor(nombre, puntaje, reseña){
         this.nombre = nombre
-        this.valoracion = valoracion
+        this.puntaje = puntaje
+        this.reseña = reseña
 }}

@@ -1,6 +1,5 @@
 class Registros{
-    constructor(nombre, apellido, correo){
-        this.nombre = nombre
-        this.apellido = apellido
-        this.correo = correo
+    constructor(usuario, contraseña){
+        this.usuario = usuario
+        this.contraseña = contraseña
 }}
