@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Final - JS - Agustin Alvarez</title>
 </head>
+
 <body>
     <h1>Bienvenidos</h1>
     <hr>
@@ -77,14 +79,45 @@
                 <button type="submit" id="reservados" class="btn btn-primary">Ver Reservados</button>
             </div>
         </form>
-
         <div class="verLeer" id="div-reservas"></div>
-
     </section>
     <hr>
-    <script src="classRegistros.js"></script>
-    <script src="classReservas.js"></script>
+    <div class="container m-3 row">
+        <div class="container m-1 col">
+            <label for="inventario">Elija un producto</label>
+
+            <select id="inventario" class="form-control"></select>
+
+            <br />
+            <button id="agregar" class="btn btn-primary">Agregar</button>
+        </div>
+        <div class="container m-1">
+            <section id="carrito">
+            <h2>Ordene comida!</h2>
+                <table class="table table-striped" id="tablaCarrito">
+                    <thead>
+                        <tr>
+                            <th scope="col">Menu</th>
+                            <th scope="col">Platos</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Eliminar Plato</th>
+                            <tbody id='items'></tbody>
+                                </table>
+                                <p><strong>Total: $<span id="total">0.00</span></strong></p>
+                                <button type="button" id="vaciar" class="btn btn-danger">Vaciar carrito</button>
+                                <button type="button" id="pagar" class="btn btn-success">Realizar Pago</button>
+                        </tr>
+                    </thead>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script src="classProducto.js"></script>
+    <script src="classItem.js"></script>
     <script src="classValoraciones.js"></script>
+    <script src="classReservas.js"></script>
+    <script src="classRegistros.js"></script>
     <script src="final.js"></script>
 </body>
+
 </html>
