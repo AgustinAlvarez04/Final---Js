@@ -1,0 +1,7 @@
+[
+    {"nombre": "Menu 1", "precio": 1500, "descrip": "Papas y pollo a la crema"},
+    {"nombre": "Menu 2", "precio": 2500, "descrip": "Papas y pollo a la crema"},
+    {"nombre": "Menu 3", "precio": 3500, "descrip": "Papas y pollo a la crema"},
+    {"nombre": "Menu 4", "precio": 4500, "descrip": "Papas y pollo a la crema"},
+    {"nombre": "Menu 5", "precio": 5500, "descrip": "Papas y pollo a la crema"}
+]

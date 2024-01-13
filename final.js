@@ -26,12 +26,38 @@ const inputPersonas = document.getElementById("personas")
 const btnReservar = document.getElementById("reservar")
 const btnReservados = document.getElementById("reservados")
 
-let users = []
-let reservas = []
-let valoraciones = []
+const inventario = document.getElementById("inventario")
+const agregarProducto = document.getElementById("agregar")
+const items = document.getElementById("items")
+const vaciar = document.getElementById("vaciar")
+const pagar = document.getElementById("pagar")
+
+
+let users = JSON.parse(localStorage.getItem('users'));
+if (users === undefined) {
+    users = [];
+}
+
+let reservas = JSON.parse(localStorage.getItem('reservas'));
+if (reservas == undefined) {
+    reservas = [];
+}
+
+let valoraciones = JSON.parse(localStorage.getItem('valoraciones'));
+if (valoraciones == undefined) {
+    valoraciones = [];
+}
+
+let stock = [];
+
+let carrito = JSON.parse(localStorage.getItem('carrito'));
+if (carrito == undefined) {
+    carrito = [];
+}
 
 btnRegistrar.onclick = (e) => {
     e.preventDefault()
+    localStorage.setItem("users", JSON.stringify(users));
     let usuario = inputUsuario.value
     let contraseña = inputContraseña.value
     let existente = users.some(elemento => elemento.usuario.toUpperCase() == usuario.toUpperCase())
@@ -57,6 +83,7 @@ btnRegistrar.onclick = (e) => {
         })
     }
 }
+
 
 btnPublicar.onclick = (e) => {
     e.preventDefault()
@@ -84,30 +111,24 @@ btnPublicar.onclick = (e) => {
             icon: "warning",
         })
     }
-    // verValoracion()
-}
-
-let valo = JSON.parse(localStorage.getItem("valo"));
-if (valo == null) {
-    valo = []
 }
 
 function verValoracion() {
-    localStorage.setItem("valo", JSON.stringify(valo));
+    localStorage.setItem("valoraciones", JSON.stringify(valoraciones));
     let div = document.getElementById("div-valoraciones")
-    for (const valoracion of valoraciones) {
-        let contenedor = document.createElement("section")
-        contenedor.innerText = `Nombre: ${valoracion.nombre} \n Puntaje: ${valoracion.puntaje} \nReseña: ${valoracion.reseña}`
-        div.appendChild(contenedor)
-    }
-}
+    div.innerHTML = ""
+    valoraciones.forEach((elemento) => {
+        let i = document.createElement("p");
+        i.innerText = `De: ${elemento.nombre} - Puntaje: ${elemento.puntaje} \nReseña: ${elemento.reseña}`
+        div.appendChild(i);
+    });
+};
 
 btnLeer.onclick = (e) => {
     e.preventDefault()
-    localStorage.setItem("valo", JSON.stringify(valo));
+    localStorage.setItem("valoraciones", JSON.stringify(valoraciones));
     verValoracion()
 }
-
 
 btnReservar.onclick = (e) => {
     e.preventDefault()
@@ -138,12 +159,14 @@ btnReservar.onclick = (e) => {
 };
 
 function verReservas() {
+    localStorage.setItem("reservas", JSON.stringify(reservas));
     let div = document.getElementById("div-reservas")
-    for (const reserva of reservas) {
-        let contenedor = document.createElement("section")
-        contenedor.innerText = `Nombre: ${reserva.nombre} Fecha: ${reserva.fecha} Mesas Ocupadas: ${reserva.personas}`
-        div.appendChild(contenedor)
-    }
+    div.innerHTML = ""
+    reservas.forEach((elemento) => {
+        let i = document.createElement("p");
+        i.innerText = `De: ${elemento.nombre} - Fecha: ${elemento.fecha} \nPara: ${elemento.personas} personas`
+        div.appendChild(i);
+    });
 }
 
 btnReservados.onclick = (e) => {
@@ -151,20 +174,11 @@ btnReservados.onclick = (e) => {
     verReservas()
 }
 
-
-let stock = [];
-let carrito = [];
-
-stock.push(new Producto("Papa", 1000));
-stock.push(new Producto("Batata", 2000));
-stock.push(new Producto("Calabaza", 3000));
-
-const inventario = document.getElementById("inventario")
-const agregarProducto = document.getElementById("agregar")
-const items = document.getElementById("items")
-const vaciar = document.getElementById("vaciar")
-const pagar = document.getElementById("pagar")
-
+stock.push(new Producto("Menu 1", 1500));
+stock.push(new Producto("Menu 2", 2500));
+stock.push(new Producto("Menu 3", 3500));
+stock.push(new Producto("Menu 4", 4500));
+stock.push(new Producto("Menu 5", 5500));
 
 function mostrarInventario() {
     inventario.innerHTML = ""
@@ -177,63 +191,53 @@ function mostrarInventario() {
 }
 
 function carroInventario(item) {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
     items.innerHTML = ""
     carrito.forEach((elemento) => {
         let tr = document.createElement("tr")
         let th = document.createElement("th")
-        th.innerText = elemento.producto.nombre
-        tr.appendChild(th)
-
-        th = document.createElement("th")
-        th.innerText = elemento.cantidad
-        tr.appendChild(th)
-
-        th = document.createElement("th")
-        th.innerText = elemento.producto.precio
-        tr.appendChild(th)
-
         let pos = carrito.indexOf(item);
-        let btnEliminar = document.createElement("button");
-        btnEliminar.className = "btn btn-danger";
-        btnEliminar.innerText = "Eliminar";
-        btnEliminar.onclick = () => {
+        let eliminar = document.createElement("button");
+
+        th = document.createElement("th")
+        th.innerText = `"${elemento.producto.nombre}"`
+        tr.appendChild(th)
+
+        th = document.createElement("th")
+        th.innerText = `°${elemento.cantidad}`
+        tr.appendChild(th)
+
+        th = document.createElement("th")
+        th.innerText = `$${elemento.producto.precio}`
+        tr.appendChild(th)
+
+        eliminar.className = "btn btn-danger";
+        eliminar.innerText = "X";
+        eliminar.onclick = () => {
             carrito.splice(pos, 1);
-            listadoUpdate();
+            carroInventario();
         };
 
         th = document.createElement("th");
-        th.append(btnEliminar);
+        th.appendChild(eliminar);
         tr.appendChild(th)
 
         items.appendChild(tr)
-    });
 
-    total.innerText = carrito.reduce((acumulador, elemento) => acumulador + elemento.precioTotal(), 0)
-}
-
-function listadoUpdate() {
-    items.innerHTML = "";
-    carrito.forEach((item) => {
-        carroInventario(item);
     });
-    total.innerText = carrito.reduce(
-        (total, item) => total + item.producto.precio * item.cantidad,
-        0
-    );
+    total.innerText = carrito.reduce((acum, elemento) => acum + elemento.cantidad * elemento.producto.precio,0);
 }
 
 agregarProducto.onclick = () => {
     let aggProd = stock[inventario.value]
     let posicion = carrito.findIndex(
         (elemento) => elemento.producto.nombre == aggProd.nombre)
-
     if (posicion == -1) {
         let item = new Item(aggProd, 1)
         carrito.push(item)
     } else {
         carrito[posicion].cantidad++
     }
-
     carroInventario()
 }
 
@@ -243,5 +247,44 @@ vaciar.onclick = () => {
     total.innerText = 0
 }
 
+pagar.onclick = () => {
+    total.innerText = carrito.reduce((acum, elemento) => acum + elemento.cantidad * elemento.producto.precio,0);
+    if (total.innerText == 0) {
+        Swal.fire({
+            title: "Error en el formulario",
+            text: "No ingresaste productos",
+            icon: "warning",
+        })
+    } else {
+        Swal.fire({
+            title: "Ya casi es tuyo!",
+            text: `Solo te queda pagar: $${total.innerText} y te enviaremos tu pedido!`,
+            icon: "success"
+        });
+    }
+}
+
+
+/* Esto no pude hacerlo funcionar en local, pero en palabras del profe dijo que esta parte podiamos correrla por live server */
+// function menu() {
+//     const lista = document.getElementById('listado')
+//     fetch('/data.json')
+//         .then((res) => res.json())
+//         .then((data) => {
+//             data.forEach((producto) => {
+//                 const li = document.createElement('li')
+//                 li.innerHTML = `
+//                 <h3>${producto.nombre}</h3>
+//                 <p>${producto.descrip}</p>
+//                 <p>Precio: ${producto.precio}</p>
+//                 <hr/>
+//             `
+//                 lista.appendChild(li)
+//             })
+//         })
+// }
+
 
 mostrarInventario()
+carroInventario()
+// menu()

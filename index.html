@@ -82,38 +82,43 @@
         <div class="verLeer" id="div-reservas"></div>
     </section>
     <hr>
-    <div class="container m-3 row">
+    <div class="col-lg-9 mx-auto row">
         <div class="container m-1 col">
-            <label for="inventario">Elija un producto</label>
-
+            <h2>Menues!</h2>
+            <div>
+                <ul id="listado"></ul>
+            </div>
+            <h2>Ordene Comida!</h2>
+            <label for="inventario">Elija un Menu</label>
             <select id="inventario" class="form-control"></select>
-
             <br />
             <button id="agregar" class="btn btn-primary">Agregar</button>
         </div>
         <div class="container m-1">
             <section id="carrito">
-            <h2>Ordene comida!</h2>
+                <h2>Vista previa de su Orden!</h2>
                 <table class="table table-striped" id="tablaCarrito">
                     <thead>
                         <tr>
-                            <th scope="col">Menu</th>
+                            <th scope="col">Menues</th>
                             <th scope="col">Platos</th>
                             <th scope="col">Precio</th>
-                            <th scope="col">Eliminar Plato</th>
-                            <tbody id='items'></tbody>
-                                </table>
-                                <p><strong>Total: $<span id="total">0.00</span></strong></p>
-                                <button type="button" id="vaciar" class="btn btn-danger">Vaciar carrito</button>
-                                <button type="button" id="pagar" class="btn btn-success">Realizar Pago</button>
-                        </tr>
-                    </thead>
+                            <th scope="col">Eliminar Menu</th>
+                    <tbody id='items'></tbody>
+                </table>
+                <p><strong>Total: $<span id="total">0.00</span></strong></p>
+                <button type="button" id="vaciar" class="btn btn-danger">Vaciar carrito</button>
+                <button type="button" id="pagar" class="btn btn-success">Realizar Pago</button>
+                </tr>
+                </thead>
                 </table>
             </section>
         </div>
     </div>
-    <script src="classProducto.js"></script>
+    <hr>
+
     <script src="classItem.js"></script>
+    <script src="classProducto.js"></script>
     <script src="classValoraciones.js"></script>
     <script src="classReservas.js"></script>
     <script src="classRegistros.js"></script>
